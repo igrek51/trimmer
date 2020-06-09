@@ -1,1 +1,4 @@
 dataclasses
+pydub
+eyeD3
+cliglue
