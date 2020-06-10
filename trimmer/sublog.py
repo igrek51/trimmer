@@ -1,0 +1,77 @@
+import datetime
+from contextlib import contextmanager
+from typing import Dict, Any
+
+C_RESET = '\033[0m'
+C_GREEN = '\033[0;32m'
+C_BLUE = '\033[0;34m'
+C_CYAN = '\033[0;36m'
+C_RED_BOLD = '\033[1;31m'
+C_GREEN_BOLD = '\033[1;32m'
+C_YELLOW_BOLD = '\033[1;33m'
+
+
+class ContextError(RuntimeError):
+    def __init__(self, message: str, **ctx):
+        super().__init__(message)
+        self.message = message
+        self.ctx = ctx
+    #
+    # def __str__(self):
+    #     display_context = _display_context(self.ctx)
+    #     if not display_context:
+    #         return self.message
+    #     return f'{self.message} {display_context}'
+
+
+@contextmanager
+def wrap_context(context_name: str, **ctx):
+    try:
+        yield
+    except ContextError as e:
+        merged_context = {**ctx, **e.ctx}
+        raise ContextError(f'{context_name}: {e}', **merged_context) from e
+    except BaseException as e:
+        raise ContextError(f'{context_name}: {e}', **ctx) from e
+
+
+@contextmanager
+def log_error():
+    try:
+        yield
+    except ContextError as e:
+        error(str(e), **e.ctx)
+    except BaseException as e:
+        error(str(e))
+
+
+def _display_context(ctx: Dict[str, Any]) -> str:
+    if len(ctx) == 0:
+        return ''
+    parts = [f'{C_GREEN}{var}={C_RESET}{C_GREEN_BOLD}{val}{C_RESET}' for var, val in ctx.items()]
+    return " ".join(parts)
+
+
+def error(message: str, **ctx):
+    print_log(message, f'{C_RED_BOLD}ERROR{C_RESET}', ctx)
+
+
+def warn(message: str, **ctx):
+    print_log(message, f'{C_YELLOW_BOLD}WARN {C_RESET}', ctx)
+
+
+def info(message: str, **ctx):
+    print_log(message, f'{C_BLUE}INFO {C_RESET}', ctx)
+
+
+def debug(message: str, **ctx):
+    print_log(message, f'{C_GREEN}DEBUG{C_RESET}', ctx)
+
+
+def print_log(message: str, level: str, ctx: Dict[str, Any]):
+    display_context = _display_context(ctx)
+    timestamp_part = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    if display_context:
+        print(f'[{C_CYAN}{timestamp_part}{C_RESET}] [{level}] {message} {display_context}')
+    else:
+        print(f'[{C_CYAN}{timestamp_part}{C_RESET}] [{level}] {message}')

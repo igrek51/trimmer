@@ -1,5 +1,5 @@
 # Trimmer
-Automatic song processing tool, which:
+Automatic MP3 songs processing tool, which:
 
 1. Downloads mp3 from youtube URL (thanks to youtube-dl)
 2. Trims down silence at the beginning & at the end of song (thanks to pydub)
@@ -10,6 +10,3 @@ Automatic song processing tool, which:
 # Installation
 
 # Usage
-
-# TODO
-- manual trimming

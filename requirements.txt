@@ -2,3 +2,4 @@ dataclasses
 pydub
 eyeD3
 cliglue
+youtube-dl
