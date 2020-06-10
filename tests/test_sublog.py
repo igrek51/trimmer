@@ -8,7 +8,7 @@ def test_sublog_wrapping():
                 raise RuntimeError('dupa')
 
     with log_error():
-        raise ContextError('dupa2', a=5, b='fifteen')
+        raise ContextError('dupa2', a=5, z='fifteen')
 
     with log_error():
         raise ContextError('dupa3')

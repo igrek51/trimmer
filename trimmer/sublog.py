@@ -38,14 +38,16 @@ def log_error(print_traceback: bool = True):
         if print_traceback:
             ex_type, ex, tb = sys.exc_info()
             frames = traceback.extract_tb(tb)
-
             lines = [f'{frame.filename}:{frame.lineno}' for frame in frames
                      if not frame.filename.endswith('/sublog.py')]
-
             tb = ','.join(lines)
             e.ctx['traceback'] = tb
 
         error(str(e), **e.ctx)
+    except KeyboardInterrupt:
+        print()
+        debug('KeyboardInterrupt')
+        exit(1)
     except Exception as e:
         error(str(e))
 
@@ -53,12 +55,13 @@ def log_error(print_traceback: bool = True):
 def _display_context(ctx: Dict[str, Any]) -> str:
     if len(ctx) == 0:
         return ''
-    parts = [_display_context_var(var, val) for var, val in ctx.items()]
+    keys = sorted(ctx.keys())
+    parts = [_display_context_var(key, ctx[key]) for key in keys]
     return " ".join(parts)
 
 
 def _display_context_var(var: str, val: str) -> str:
-    val = f'{val}'
+    val = str(val)
     if ' ' in val:
         return f'{C_GREEN}{var}="{C_GREEN_BOLD}{val}{C_GREEN}"{C_RESET}'
     else:
