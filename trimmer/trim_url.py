@@ -1,33 +1,21 @@
 from typing import Optional
 
-from trimmer.mp3_normalizer import Mp3Normalizer
-from trimmer.mp3_renamer import Mp3Renamer
-from trimmer.mp3_tagger import Mp3Tagger
+from trimmer.mp3_normalizer import normalize_song
+from trimmer.mp3_tagger import tag_mp3
+from trimmer.song_renamer import rename_song
 from trimmer.sublog import info, log_error, wrap_context
-from trimmer.yt_downloader import YoutubeDownloader
+from trimmer.yt_downloader import download_from_youtube
 
 
 def trim_url(url: str, artist: Optional[str], title: Optional[str]):
     with log_error():
-        if not artist:
-            artist = input('Artist: ')
-        if not title:
-            artist = input('Title: ')
+        with wrap_context('url song'):
+            artist = artist or input('Artist: ')
+            title = title or input('Title: ')
 
-        with wrap_context('downloading from youtube', url=url):
-            info('downloading from youtube...', url=url)
-            mp3_file = YoutubeDownloader().download(url)
+            mp3_file = download_from_youtube(url)
+            mp3_file = rename_song(mp3_file, artist, title)
+            normalize_song(mp3_file)
+            tag_mp3(mp3_file, artist, title)
 
-        with wrap_context('renaming mp3', artist=artist, title=title, mp3_file=mp3_file):
-            info('renaming mp3...', artist=artist, title=title, mp3_file=mp3_file)
-            mp3_file = Mp3Renamer().rename(mp3_file, artist, title)
-
-        with wrap_context('normalizing mp3', mp3_file=mp3_file):
-            info('normalizing mp3...', mp3_file=mp3_file)
-            Mp3Normalizer().normalize(mp3_file)
-
-        with wrap_context('tagging mp3', artist=artist, title=title, mp3_file=mp3_file):
-            info('tagging mp3...', artist=artist, title=title, mp3_file=mp3_file)
-            Mp3Tagger().tag(mp3_file, artist, title)
-
-        info('success')
+            info('song saved', mp3_file=mp3_file)

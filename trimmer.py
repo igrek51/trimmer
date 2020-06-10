@@ -18,6 +18,8 @@ def main():
         ),
         subcommand('trim', help='trim already downloaded song', run=trim_mp3).has(
             argument('file', help='MP3 filename', type=existing_file),
+            parameter('artist', help='song artist', type=str),
+            parameter('title', help='song title', type=str),
         ),
         subcommand('upgrade', help='upgrade dependencies', run=upgrade),
     ).run()

@@ -1,5 +1,7 @@
 from pydub import AudioSegment
 
+from trimmer.mp3_normalizer import detect_leading_silence
+
 
 def test_volume_normalize():
     song = AudioSegment.from_mp3("./tests/tubular_ex.mp3")
@@ -12,21 +14,6 @@ def test_volume_normalize():
 
     normalized_song = AudioSegment.from_mp3("./tests/result_tubular_normalized.mp3")
     assert -0.6 < normalized_song.max_dBFS < 0.6
-
-
-def detect_leading_silence(song, silence_threshold=-50.0, chunk_size=100):
-    """
-    sound is a pydub.AudioSegment
-    silence_threshold in dB
-    chunk_size in ms
-
-    iterate over chunks until you find the first one with sound
-    """
-    trim_ms = 0  # ms
-    assert chunk_size > 0
-    while song[trim_ms:trim_ms + chunk_size].dBFS < silence_threshold and trim_ms < len(song):
-        trim_ms += chunk_size
-    return trim_ms
 
 
 def test_trim_down_the_silence():
