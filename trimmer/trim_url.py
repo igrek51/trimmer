@@ -14,7 +14,7 @@ def trim_url(url: str, artist: Optional[str], title: Optional[str]):
         if not title:
             artist = input('Title: ')
 
-    info('downloading')
+    info('downloading from url', url=url)
     mp3_file = YoutubeDownloader().download(url)
     mp3_file = Mp3Renamer().rename(mp3_file, artist, title)
     Mp3Normalizer().normalize(mp3_file)

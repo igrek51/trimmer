@@ -1,4 +1,6 @@
 import datetime
+import sys
+import traceback
 from contextlib import contextmanager
 from typing import Dict, Any
 
@@ -14,14 +16,7 @@ C_YELLOW_BOLD = '\033[1;33m'
 class ContextError(RuntimeError):
     def __init__(self, message: str, **ctx):
         super().__init__(message)
-        self.message = message
         self.ctx = ctx
-    #
-    # def __str__(self):
-    #     display_context = _display_context(self.ctx)
-    #     if not display_context:
-    #         return self.message
-    #     return f'{self.message} {display_context}'
 
 
 @contextmanager
@@ -31,25 +26,43 @@ def wrap_context(context_name: str, **ctx):
     except ContextError as e:
         merged_context = {**ctx, **e.ctx}
         raise ContextError(f'{context_name}: {e}', **merged_context) from e
-    except BaseException as e:
+    except Exception as e:
         raise ContextError(f'{context_name}: {e}', **ctx) from e
 
 
 @contextmanager
-def log_error():
+def log_error(print_traceback: bool = True):
     try:
         yield
     except ContextError as e:
+        if print_traceback:
+            ex_type, ex, tb = sys.exc_info()
+            frames = traceback.extract_tb(tb)
+
+            lines = [f'{frame.filename}:{frame.lineno}' for frame in frames
+                     if not frame.filename.endswith('/sublog.py')]
+
+            tb = ','.join(lines)
+            e.ctx['traceback'] = tb
+
         error(str(e), **e.ctx)
-    except BaseException as e:
+    except Exception as e:
         error(str(e))
 
 
 def _display_context(ctx: Dict[str, Any]) -> str:
     if len(ctx) == 0:
         return ''
-    parts = [f'{C_GREEN}{var}={C_RESET}{C_GREEN_BOLD}{val}{C_RESET}' for var, val in ctx.items()]
+    parts = [_display_context_var(var, val) for var, val in ctx.items()]
     return " ".join(parts)
+
+
+def _display_context_var(var: str, val: str) -> str:
+    val = f'{val}'
+    if ' ' in val:
+        return f'{C_GREEN}{var}="{C_GREEN_BOLD}{val}{C_GREEN}"{C_RESET}'
+    else:
+        return f'{C_GREEN}{var}={C_GREEN_BOLD}{val}{C_RESET}'
 
 
 def error(message: str, **ctx):

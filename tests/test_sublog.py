@@ -13,6 +13,6 @@ def test_sublog_wrapping():
     with log_error():
         raise ContextError('dupa3')
 
-    info('success')
+    info('success', param='with_param')
     warn('attention')
     debug('trace')

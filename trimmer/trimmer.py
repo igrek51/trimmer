@@ -4,9 +4,9 @@ from cliglue import CliBuilder, argument, parameter, subcommand
 from cliglue.types.filesystem import existing_file
 from cliglue.utils.shell import shell
 
-from .trim_mp3 import trim_mp3
-from .trim_url import trim_url
-from .version import __version__
+from trimmer.trim_mp3 import trim_mp3
+from trimmer.trim_url import trim_url
+from trimmer.version import __version__
 
 
 def main():
