@@ -55,7 +55,7 @@ def log_error(print_traceback: bool = True):
 def _display_context(ctx: Dict[str, Any]) -> str:
     if len(ctx) == 0:
         return ''
-    keys = sorted(ctx.keys())
+    keys = ctx.keys()
     parts = [_display_context_var(key, ctx[key]) for key in keys]
     return " ".join(parts)
 

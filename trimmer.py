@@ -16,10 +16,12 @@ def main():
             parameter('artist', help='song artist', type=str),
             parameter('title', help='song title', type=str),
         ),
-        subcommand('trim', help='trim already downloaded song', run=trim_mp3).has(
+        subcommand('mp3', help='trim already downloaded song', run=trim_mp3).has(
             argument('file', help='MP3 filename', type=existing_file),
             parameter('artist', help='song artist', type=str),
             parameter('title', help='song title', type=str),
+            parameter('trim-start', help='trim seconds at the beginning', type=float),
+            parameter('trim-end', help='trim seconds at the end', type=float),
         ),
         subcommand('upgrade', help='upgrade dependencies', run=upgrade),
     ).run()

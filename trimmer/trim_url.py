@@ -1,9 +1,9 @@
 from typing import Optional
 
-from trimmer.mp3_normalizer import normalize_song
-from trimmer.mp3_tagger import tag_mp3
-from trimmer.song_renamer import rename_song
+from trimmer.normalizer import normalize_song
+from trimmer.renamer import rename_song
 from trimmer.sublog import info, log_error, wrap_context
+from trimmer.tagger import tag_mp3
 from trimmer.yt_downloader import download_from_youtube
 
 
