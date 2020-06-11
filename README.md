@@ -15,3 +15,4 @@ Songs downloader & normalizer for automatic MP3 processing, which:
 - full readme/docs
 - extracting artis - title from youtube-dl title
 - idempotent trimming (not trimming fade-outs again)
+- fix sublog real traceback for wrapped exception
