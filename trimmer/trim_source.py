@@ -7,7 +7,7 @@ from trimmer.renamer import rename_song
 from trimmer.sublog import info, log_error, wrap_context
 from trimmer.tagger import read_mp3_tags
 from trimmer.tagger import tag_mp3
-from trimmer.yt_downloader import download_from_youtube
+from trimmer.yt_downloader import download_from_youtube, extract_youtube_artist_title
 
 
 def trim_from_source(source: str, artist: Optional[str], title: Optional[str],
@@ -24,8 +24,14 @@ def trim_from_source(source: str, artist: Optional[str], title: Optional[str],
 def trim_url(url: str, artist: Optional[str], title: Optional[str],
              trim_start: Optional[float] = None, trim_end: Optional[float] = None):
     with wrap_context('url song'):
-        artist = artist or input('Artist: ')
-        title = title or input('Title: ')
+        yt_artist, yt_title = extract_youtube_artist_title(url)
+
+        artist = artist or input(f'Artist ("{yt_artist}" by default): ' if yt_artist else 'Artist: ')
+        if not artist:
+            artist = yt_artist
+        title = title or input(f'Title ("{yt_title}" by default): ' if yt_title else 'Title: ')
+        if not title:
+            title = yt_title
 
         mp3_file = download_from_youtube(url)
         mp3_file = rename_song(mp3_file, artist, title)

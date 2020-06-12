@@ -71,5 +71,4 @@ python setup.py develop
 
 # TODO
 - full readme/docs, sublog screen
-- extracting artist - title from youtube-dl title
 - idempotent trimming (not trimming fade-outs again)
