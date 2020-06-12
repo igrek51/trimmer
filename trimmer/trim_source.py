@@ -22,7 +22,7 @@ def trim_from_source(source: str, artist: Optional[str], title: Optional[str],
 
 
 def trim_url(url: str, artist: Optional[str], title: Optional[str],
-             trim_start: Optional[float], trim_end: Optional[float]):
+             trim_start: Optional[float] = None, trim_end: Optional[float] = None):
     with wrap_context('url song'):
         artist = artist or input('Artist: ')
         title = title or input('Title: ')
@@ -36,7 +36,7 @@ def trim_url(url: str, artist: Optional[str], title: Optional[str],
 
 
 def trim_mp3(file: str, artist: Optional[str], title: Optional[str],
-             trim_start: Optional[float], trim_end: Optional[float]):
+             trim_start: Optional[float] = None, trim_end: Optional[float] = None):
     with wrap_context('url song'):
         assert os.path.isfile(file), 'input file should exist'
 

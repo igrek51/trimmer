@@ -2,7 +2,7 @@ import os
 
 import eyed3
 from pydub import AudioSegment
-from trimmer.trim_url import trim_url
+from trimmer.trim_source import trim_url
 
 
 def test_trim_from_url():
