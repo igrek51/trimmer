@@ -9,6 +9,14 @@ Songs downloader & normalizer for automatic MP3 processing, which:
 
 # Installation
 
+
+## Install locally
+```shell
+./setup_venv.sh
+. venv/bin/activate
+python setup.py develop
+```
+
 # Usage
 
 # TODO
