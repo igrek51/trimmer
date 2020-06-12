@@ -28,6 +28,6 @@ def download_from_youtube(url: str) -> str:
 
         full_filename = f'{filename}.mp3'
         assert os.path.isfile(full_filename)
-        info('song downloaded', filename=full_filename)
+        info('song downloaded', tmpfile=full_filename)
 
         return full_filename

@@ -12,7 +12,7 @@ setuptools.setup(
     version=__version__,
     author="igrek51",
     author_email="igrek51.dev@gmail.com",
-    description="Automatic song processing tool",
+    description="MP3 song normalizer",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/igrek51/trimmer",
