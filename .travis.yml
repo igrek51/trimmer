@@ -11,6 +11,6 @@ install:
 before_script:
   - python3 setup.py develop
 script:
-  - ./pytest.sh
+  - ./setup_venv.sh && . venv/bin/activate && ./pytest.sh
 after_success:
   - coveralls
