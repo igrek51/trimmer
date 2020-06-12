@@ -12,7 +12,7 @@ def test_youtube_dl():
             'preferredcodec': 'mp3',
             'preferredquality': '192',
         }],
-        'outtmpl': '/tmp/trimmer_dl_1234.%(ext)s'
+        'outtmpl': '/tmp/trimmer_dl_1234.%(ext)s',
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         result = ydl.download([url])
