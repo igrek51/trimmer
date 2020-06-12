@@ -1,0 +1,8 @@
+site_name: trimmer
+theme: readthedocs
+repo_url: https://github.com/igrek51/trimmer
+site_author: igrek51
+docs_dir: docs
+
+nav:
+    - Single page documentation: README.md
