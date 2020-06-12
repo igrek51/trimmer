@@ -25,4 +25,9 @@ setuptools.setup(
     install_requires=install_requires,
     license='MIT',
     python_requires='>=3.6.0',
+    entry_points={
+        "console_scripts": [
+            "trimmer = trimmer:main",
+        ],
+    },
 )
