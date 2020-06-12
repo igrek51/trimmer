@@ -16,3 +16,18 @@ def test_sublog_wrapping():
     info('success', param='with_param')
     warn('attention')
     debug('trace')
+
+
+def test_sublog_traceback():
+    with log_error():
+        with wrap_context('initializing', request_id=42):
+            with wrap_context('liftoff', speed='zero'):
+                disaster()
+
+
+def disaster():
+    reason()
+
+
+def reason():
+    raise RuntimeError('disaster')

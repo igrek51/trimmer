@@ -37,7 +37,13 @@ def log_error(print_traceback: bool = True):
     except ContextError as e:
         if print_traceback:
             ex_type, ex, tb = sys.exc_info()
-            frames = traceback.extract_tb(tb)
+            # traceback.format_exception(ex_type, ex, tb)
+            t1 = traceback.TracebackException(type(ex_type), ex, tb, limit=None)
+            while t1.__cause__ is not None:
+                t1 = t1.__cause__
+
+            frames = traceback.extract_tb(t1.exc_traceback)
+
             lines = [f'{frame.filename}:{frame.lineno}' for frame in frames
                      if not frame.filename.endswith('/sublog.py')]
             tb = ','.join(lines)

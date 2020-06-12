@@ -56,4 +56,3 @@ python setup.py develop
 - full readme/docs, sublog screen
 - extracting artist - title from youtube-dl title
 - idempotent trimming (not trimming fade-outs again)
-- fix sublog real traceback for wrapped exception
