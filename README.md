@@ -70,5 +70,4 @@ python setup.py develop
 ```
 
 # TODO
-- full readme/docs, sublog screen
 - idempotent trimming (not trimming fade-outs again)
