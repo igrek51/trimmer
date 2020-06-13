@@ -1,11 +1,16 @@
 import os
+import sys
 
 import eyed3
 from pydub import AudioSegment
+
 from trimmer.trim_source import trim_url
 
 
 def test_trim_from_url():
+    # workaround for travis + python stdout opened in rb+ mode
+    sys.stdout = open(sys.stdout.fileno(), mode='r+', encoding='utf8', buffering=1)
+
     url = 'https://www.youtube.com/watch?v=omafc3SazWA'
     trim_url(url, artist='Stachu Jones', title='O kurna')
 
