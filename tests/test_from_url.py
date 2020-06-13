@@ -4,7 +4,7 @@ import sys
 import eyed3
 from pydub import AudioSegment
 
-from trimmer.trim_source import trim_url
+from trimmer.trim_source import trim_from_source
 
 
 def test_trim_from_url():
@@ -12,7 +12,8 @@ def test_trim_from_url():
     sys.stdout = open(sys.stdout.fileno(), mode='r+', encoding='utf8', buffering=1)
 
     url = 'https://www.youtube.com/watch?v=omafc3SazWA'
-    trim_url(url, artist='Stachu Jones', title='O kurna')
+    trim_from_source(url, artist='Stachu Jones', title='O kurna', no_trim=False, no_fade=False,
+                     trim_start=None, trim_end=None)
 
     filename = 'Stachu Jones - O kurna.mp3'
     assert os.path.isfile(filename), 'output file should exist'

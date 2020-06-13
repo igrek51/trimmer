@@ -1,4 +1,4 @@
-from cliglue import CliBuilder, argument, parameter, primary_option
+from cliglue import CliBuilder, argument, parameter, primary_option, flag
 
 from trimmer.upgrade import upgrade
 from .trim_source import trim_from_source
@@ -12,5 +12,7 @@ def main():
         parameter('title', help='song title', type=str),
         parameter('trim-start', help='trim given seconds at the beginning', type=float),
         parameter('trim-end', help='trim given seconds at the end', type=float),
+        flag('no-trim', help='skip trimming silence at the edges of song'),
+        flag('no-fade', help='skip applying fade-in & fade-out'),
         primary_option('--upgrade', help='upgrade dependencies & exit', run=upgrade),
     ).run()
