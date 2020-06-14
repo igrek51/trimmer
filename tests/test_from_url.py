@@ -12,7 +12,8 @@ def test_trim_from_url():
     sys.stdout = open(sys.stdout.fileno(), mode='r+', encoding='utf8', buffering=1)
 
     url = 'https://www.youtube.com/watch?v=omafc3SazWA'
-    trim_from_source(url, artist='Stachu Jones', title='O kurna', no_trim=False, no_fade=False,
+    trim_from_source(url, artist='Stachu Jones', title='O kurna',
+                     no_trim=False, no_fade=False, no_normalize=False,
                      trim_start=None, trim_end=None)
 
     filename = 'Stachu Jones - O kurna.mp3'

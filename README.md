@@ -11,7 +11,7 @@ trimmer does the following things:
 1. Downloads songs from given youtube URL (thanks to [youtube-dl](https://github.com/ytdl-org/youtube-dl))
 2. Trims down silence at the beginning & at the end of song (thanks to [pydub](https://github.com/jiaaro/pydub))
 3. Normalizes volume level, applies fade-in & fade-out (thanks to [pydub](https://github.com/jiaaro/pydub))
-4. Adds MP3 ID3v2 tags (thanks to [eyed3](https://github.com/nicfit/eyeD3))
+4. Adds MP3 ID3 tags - both ID3v1 & ID3v2 (thanks to [eyed3](https://github.com/nicfit/eyeD3))
 5. Creates mp3 file named: `Artist - Title.mp3`
 
 # Usage
@@ -23,18 +23,24 @@ trimmer https://www.youtube.com/watch?v=dQw4w9WgXcQ
 ![Usage example](https://github.com/igrek51/trimmer/blob/master/docs/img/screenshot-1.png?raw=true)
 
 ## Editing MP3
-Trim down manually (e.g. long applause at the end of song)
 ```shell
-trimmer "Rick Astley - Never Gonna Give You Up.mp3" --trim-end 30
+trimmer "Rick Astley - Never Gonna Give You Up.mp3"
 ```
+
+From this:
+![Usage example](https://github.com/igrek51/trimmer/blob/master/docs/img/song_amp_bad.png?raw=true)
+trimmer does this:
+![Usage example](https://github.com/igrek51/trimmer/blob/master/docs/img/song_amp_good.png?raw=true)
+
+You can also trim song manually using `--trim-start` and `--trim-end` (e.g. for cutting long applause at the end of song).
 
 ## Help
 ```shell
 $ trimmer --help
-trimmer v0.1.3 (cliglue v1.0.8) - Automatic song processing tool
+trimmer v0.1.5 (cliglue v1.0.10) - Automatic song processing tool
 
 Usage:
-/mnt/data/Igrek/python/trimmer/venv/bin/trimmer [OPTIONS] SOURCE
+trimmer [OPTIONS] SOURCE
 
 Arguments:
    SOURCE - song source (youtube URL or MP3 file)
@@ -46,7 +52,9 @@ Options:
   --title TITLE               - song title
   --trim-start TRIM_START     - trim given seconds at the beginning
   --trim-end TRIM_END         - trim given seconds at the end
-  --upgrade                   - upgrade dependencies & exit
+  --no-normalize              - skip normalizing volume level
+  --no-trim                   - skip trimming silence at the edges of song
+  --no-fade                   - skip applying fade-in & fade-out
 ```
 
 # Installation
@@ -56,6 +64,10 @@ pip3 install trimmer
 
 Requirements:
 * Python 3.6 (or newer) with pip
+
+For Linux make sure that required libs are installed: `apt install ffmpeg libavcodec-extra`
+
+For Windows you might need to put [ffmpeg binaries](https://ffmpeg.zeranoe.com/builds/) to `PATH`.
 
 ## Upgrading
 ```
@@ -68,6 +80,3 @@ pip3 install --upgrade trimmer
 . venv/bin/activate
 python setup.py develop
 ```
-
-# TODO
-- idempotent trimming (not trimming fade-outs again)

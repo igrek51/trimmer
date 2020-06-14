@@ -1,4 +1,4 @@
-from trimmer.sublog import wrap_context, log_error, ContextError, info, warn, debug
+from trimmer.sublog.sublog import wrap_context, log_error, ContextError, info, warn, debug
 
 
 def test_sublog_wrapping():

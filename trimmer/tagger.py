@@ -3,7 +3,7 @@ from typing import Tuple
 import eyed3
 from eyed3.id3 import ID3_V2_4, ID3_V1_1
 
-from trimmer.sublog import wrap_context, info, warn
+from trimmer.sublog.sublog import wrap_context, info, warn
 
 
 def tag_mp3(mp3_file: str, artist: str, title: str):

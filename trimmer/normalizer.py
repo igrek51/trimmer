@@ -2,19 +2,20 @@ from typing import Optional
 
 from pydub import AudioSegment
 
-from trimmer.sublog import wrap_context, info
+from trimmer.sublog.sublog import wrap_context, info
 
 
-def normalize_song(mp3_file: str, no_trim: bool, no_fade: bool,
+def normalize_song(mp3_file: str, no_trim: bool, no_fade: bool, no_normalize: bool,
                    trim_start: Optional[float] = None, trim_end: Optional[float] = None):
     with wrap_context('normalizing mp3', mp3_file=mp3_file):
         info('loading song...', mp3_file=mp3_file)
         song = AudioSegment.from_mp3(mp3_file)
 
-        info('normalizing volume level...')
-        gain = -song.max_dBFS
-        song = song.apply_gain(gain)
-        info('volume normalized', gain=f'{gain:.2f}dB')
+        if not no_normalize:
+            info('normalizing volume level...')
+            gain = -song.max_dBFS
+            song = song.apply_gain(gain)
+            info('volume normalized', gain=f'{gain:.2f}dB')
 
         if not no_trim:
             info('trimming silence...')
