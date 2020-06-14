@@ -5,7 +5,7 @@ from .version import __version__
 
 
 def main():
-    CliBuilder('trimmer', version=__version__, help='Automatic song processing tool',
+    CliBuilder('trimmer', version=__version__, help='MP3 song normalizer',
                run=trim_from_source, help_on_empty=True).has(
         argument('source', help='song source (youtube URL or MP3 file)'),
         parameter('artist', help='song artist', type=str),

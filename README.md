@@ -42,7 +42,7 @@ You can also trim song manually using `--trim-start` and `--trim-end` (e.g. for 
 ## Help
 ```shell
 $ trimmer --help
-trimmer v0.1.5 (cliglue v1.0.10) - Automatic song processing tool
+trimmer v0.1.5 (cliglue v1.0.10) - MP3 song normalizer
 
 Usage:
 trimmer [OPTIONS] SOURCE

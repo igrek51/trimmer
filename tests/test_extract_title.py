@@ -3,7 +3,7 @@ import sys
 from trimmer.downloader import extract_youtube_artist_title
 
 
-def test_trim_from_url():
+def test_extract_title():
     # workaround for travis + python stdout opened in rb+ mode
     sys.stdout = open(sys.stdout.fileno(), mode='r+', encoding='utf8', buffering=1)
 
