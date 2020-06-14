@@ -11,6 +11,7 @@ MP3 song normalizer
 Are you tired of quiet songs on Youtube with long silence before or after song? 
 
 Trimmer does the following things:
+
 1. Downloads songs from given Youtube URL (thanks to [youtube-dl](https://github.com/ytdl-org/youtube-dl))
 2. Trims down silence at the beginning & at the end of song (thanks to [pydub](https://github.com/jiaaro/pydub))
 3. Normalizes volume level, applies fade-in & fade-out (thanks to [pydub](https://github.com/jiaaro/pydub))
@@ -68,6 +69,7 @@ pip3 install trimmer
 ```
 
 Requirements:
+
 * Python 3.6 (or newer) with pip
 
 For Linux make sure that required libs are installed: `apt install ffmpeg libavcodec-extra`
