@@ -62,8 +62,12 @@ def extract_youtube_artist_title(url: str) -> Tuple[str, str]:
     if '-' not in yt_title:
         return '', yt_title.strip()
     dash_index = yt_title.find('-')
+
     artist = yt_title[:dash_index].strip()
+
     title = yt_title[dash_index + 1:].strip()
+    title = re.sub(r"\(.+?\)", "", title)
     title = re.sub(r"[. ]+$", "", title)
+
     info('artist & title extracted from youtube page', artist=artist, title=title)
     return artist, title

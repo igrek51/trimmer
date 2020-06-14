@@ -1,22 +1,25 @@
 # Trimmer
+MP3 song normalizer
+
 [![GitHub version](https://badge.fury.io/gh/igrek51%2Ftrimmer.svg)](https://github.com/igrek51/trimmer)
 [![PyPI version](https://badge.fury.io/py/trimmer.svg)](https://pypi.org/project/trimmer)
 [![Documentation Status](https://readthedocs.org/projects/trimmer-py/badge/?version=latest)](https://trimmer-py.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://travis-ci.org/igrek51/trimmer.svg?branch=master)](https://travis-ci.org/igrek51/trimmer)
 [![Coverage Status](https://coveralls.io/repos/github/igrek51/trimmer/badge.svg?branch=master)](https://coveralls.io/github/igrek51/trimmer?branch=master)
 
-MP3 song normalizer
 
-trimmer does the following things:
-1. Downloads songs from given youtube URL (thanks to [youtube-dl](https://github.com/ytdl-org/youtube-dl))
+Are you tired of quiet songs on Youtube with long silence before or after song? 
+
+Trimmer does the following things:
+1. Downloads songs from given Youtube URL (thanks to [youtube-dl](https://github.com/ytdl-org/youtube-dl))
 2. Trims down silence at the beginning & at the end of song (thanks to [pydub](https://github.com/jiaaro/pydub))
 3. Normalizes volume level, applies fade-in & fade-out (thanks to [pydub](https://github.com/jiaaro/pydub))
 4. Adds MP3 ID3 tags - both ID3v1 & ID3v2 (thanks to [eyed3](https://github.com/nicfit/eyeD3))
 5. Creates mp3 file named: `Artist - Title.mp3`
 
 # Usage
-## Downloading MP3 from YouTube URL
-Create trimmed, normalized, tagged mp3:
+## Downloading MP3
+Create trimmed, normalized & tagged mp3 from Youtube URL:
 ```shell
 trimmer https://www.youtube.com/watch?v=dQw4w9WgXcQ
 ```
@@ -27,9 +30,9 @@ trimmer https://www.youtube.com/watch?v=dQw4w9WgXcQ
 trimmer "Rick Astley - Never Gonna Give You Up.mp3"
 ```
 
-From this:
-![Usage example](https://github.com/igrek51/trimmer/blob/master/docs/img/song_amp_bad.png?raw=true)
-trimmer does this:
+From this:  
+![Usage example](https://github.com/igrek51/trimmer/blob/master/docs/img/song_amp_bad.png?raw=true)  
+trimmer does this:  
 ![Usage example](https://github.com/igrek51/trimmer/blob/master/docs/img/song_amp_good.png?raw=true)
 
 You can also trim song manually using `--trim-start` and `--trim-end` (e.g. for cutting long applause at the end of song).
