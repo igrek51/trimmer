@@ -27,12 +27,14 @@ trimmer https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
 ## Editing MP3
 ```shell
-trimmer "Rick Astley - Never Gonna Give You Up.mp3"
+trimmer "unknown001.mp3"
 ```
 
 From this:  
+**unknown001.mp3**  
 ![Usage example](https://github.com/igrek51/trimmer/blob/master/docs/img/song_amp_bad.png?raw=true)  
 trimmer does this:  
+**Mike Oldfield - Tubular Bells Part I.mp3**  
 ![Usage example](https://github.com/igrek51/trimmer/blob/master/docs/img/song_amp_good.png?raw=true)
 
 You can also trim song manually using `--trim-start` and `--trim-end` (e.g. for cutting long applause at the end of song).
@@ -73,6 +75,7 @@ For Linux make sure that required libs are installed: `apt install ffmpeg libavc
 For Windows you might need to put [ffmpeg binaries](https://ffmpeg.zeranoe.com/builds/) to `PATH`.
 
 ## Upgrading
+For frequently changing dependencies API:
 ```
 pip3 install --upgrade trimmer
 ```
