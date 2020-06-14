@@ -20,7 +20,7 @@ Create trimmed, normalized, tagged mp3:
 ```shell
 trimmer https://www.youtube.com/watch?v=dQw4w9WgXcQ
 ```
-![Usage example](https://github.com/igrek51/trimmer/blob/master/docs/img/screenshot-1.png)
+![Usage example](https://github.com/igrek51/trimmer/blob/master/docs/img/screenshot-1.png?raw=true)
 
 ## Editing MP3
 Trim down manually (e.g. long applause at the end of song)
