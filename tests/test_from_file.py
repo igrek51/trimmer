@@ -14,7 +14,7 @@ def test_trim_from_file():
 
     trim_from_source(source, artist='result_Mike', title=None,
                      no_trim=False, no_fade=False, no_normalize=False,
-                     trim_start=None, trim_end=None)
+                     trim_start=None, trim_end=None, gain=None)
 
     assert not os.path.isfile(source), 'source file should not exist any longer'
     output = './tests/result_Mike - Tubular Bells Part I (2003).mp3'

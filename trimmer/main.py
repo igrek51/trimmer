@@ -12,6 +12,7 @@ def main():
         parameter('title', help='song title', type=str),
         parameter('trim-start', help='trim given seconds at the beginning', type=float),
         parameter('trim-end', help='trim given seconds at the end', type=float),
+        parameter('gain', help='increase volume by given dB', type=float),
         flag('no-normalize', help='skip normalizing volume level'),
         flag('no-trim', help='skip trimming silence at the edges of song'),
         flag('no-fade', help='skip applying fade-in & fade-out'),

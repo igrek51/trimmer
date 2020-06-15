@@ -14,7 +14,7 @@ def test_trim_from_url():
     url = 'https://www.youtube.com/watch?v=omafc3SazWA'
     trim_from_source(url, artist='Stachu Jones', title='O kurna',
                      no_trim=False, no_fade=False, no_normalize=False,
-                     trim_start=None, trim_end=None)
+                     trim_start=None, trim_end=None, gain=None)
 
     filename = 'Stachu Jones - O kurna.mp3'
     assert os.path.isfile(filename), 'output file should exist'

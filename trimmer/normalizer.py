@@ -6,7 +6,8 @@ from trimmer.sublog.sublog import wrap_context, info
 
 
 def normalize_song(mp3_file: str, no_trim: bool, no_fade: bool, no_normalize: bool,
-                   trim_start: Optional[float] = None, trim_end: Optional[float] = None):
+                   user_trim_start: Optional[float] = None, user_trim_end: Optional[float] = None,
+                   user_gain: Optional[float] = None):
     with wrap_context('normalizing mp3', mp3_file=mp3_file):
         info('loading song...', mp3_file=mp3_file)
         song = AudioSegment.from_mp3(mp3_file)
@@ -14,13 +15,16 @@ def normalize_song(mp3_file: str, no_trim: bool, no_fade: bool, no_normalize: bo
         if not no_normalize:
             info('normalizing volume level...')
             gain = -song.max_dBFS
+            if user_gain is not None:
+                gain = user_gain
             song = song.apply_gain(gain)
             info('volume normalized', gain=f'{gain:.2f}dB')
 
         if not no_trim:
             info('trimming silence...')
-            start_trim = trim_start * 1000 if trim_start is not None else detect_leading_silence(song)
-            end_trim = trim_end * 1000 if trim_end is not None else detect_leading_silence(song.reverse(), margin=0)
+            start_trim = user_trim_start * 1000 if user_trim_start is not None else detect_leading_silence(song)
+            end_trim = user_trim_end * 1000 if user_trim_end is not None else detect_leading_silence(song.reverse(),
+                                                                                                     margin=0)
             pre_duration = len(song)
             song = song[start_trim:-end_trim]
             post_duration = len(song)
