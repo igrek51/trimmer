@@ -26,7 +26,7 @@ def normalize_song(mp3_file: str, no_trim: bool, no_fade: bool, no_normalize: bo
             end_trim = user_trim_end * 1000 if user_trim_end is not None else detect_leading_silence(song.reverse(),
                                                                                                      margin=0)
             pre_duration = len(song)
-            song = song[start_trim:-end_trim]
+            song = song[start_trim:len(song) - end_trim]
             post_duration = len(song)
             info('silence trimmed', trim_start=duration_to_human(start_trim), trim_end=duration_to_human(end_trim),
                  duration_before=duration_to_human(pre_duration), duration_after=duration_to_human(post_duration))

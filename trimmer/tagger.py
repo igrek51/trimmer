@@ -10,7 +10,7 @@ from trimmer.sublog.sublog import wrap_context, info, warn
 
 def tag_mp3(mp3_file: str, artist: str, title: str):
     with wrap_context('tagging mp3', artist=artist, title=title, mp3_file=mp3_file):
-        info('tagging mp3...', artist=artist, title=title, mp3_file=mp3_file)
+        info('tagging mp3...', artist=artist, title=title)
 
         audiofile = eyed3.load(mp3_file)
         audiofile.tag.artist = artist
