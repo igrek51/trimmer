@@ -28,7 +28,7 @@ def test_youtube_dl_download():
 
 def test_youtube_dl_title():
     # workaround for travis + python stdout opened in rb+ mode
-    sys.stdout = open(sys.stdout.fileno(), mode='r+', encoding='utf8', buffering=1)
+    # sys.stdout = open(sys.stdout.fileno(), mode='r+', encoding='utf8', buffering=1)
 
     url = 'https://www.youtube.com/watch?v=omafc3SazWA'
     ydl_opts = {
