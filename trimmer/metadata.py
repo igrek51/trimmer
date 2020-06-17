@@ -1,8 +1,6 @@
 import re
 from typing import Tuple
 
-from trimmer.sublog.sublog import info
-
 
 def extract_artist_title(name: str) -> Tuple[str, str]:
     if '-' not in name:
@@ -15,5 +13,4 @@ def extract_artist_title(name: str) -> Tuple[str, str]:
     title = re.sub(r"\(.+?\)", "", title)
     title = re.sub(r"[. ]+$", "", title)
 
-    info('artist & title extracted from youtube page', artist=artist, title=title)
     return artist, title

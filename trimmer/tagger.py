@@ -47,4 +47,6 @@ def read_mp3_tags(mp3_file: str) -> Tuple[str, str]:
 def extract_filename_artist_title(mp3_file: str) -> Tuple[str, str]:
     with wrap_context('extracting metadata from filename'):
         _, filename = os.path.split(mp3_file)
+        if filename.lower().endswith('.mp3'):
+            filename = mp3_file[:-4]
         return extract_artist_title(filename)
