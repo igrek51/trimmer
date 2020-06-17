@@ -5,8 +5,8 @@ MP3 song normalizer
 [![PyPI version](https://badge.fury.io/py/trimmer.svg)](https://pypi.org/project/trimmer)
 [![Documentation Status](https://readthedocs.org/projects/trimmer-py/badge/?version=latest)](https://trimmer-py.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://travis-ci.org/igrek51/trimmer.svg?branch=master)](https://travis-ci.org/igrek51/trimmer)
-[![Coverage Status](https://coveralls.io/repos/github/igrek51/trimmer/badge.svg?branch=master)](https://coveralls.io/github/igrek51/trimmer?branch=master)
 [![codecov](https://codecov.io/gh/igrek51/trimmer/branch/master/graph/badge.svg)](https://codecov.io/gh/igrek51/trimmer)
+[![Coverage Status](https://coveralls.io/repos/github/igrek51/trimmer/badge.svg?branch=master)](https://coveralls.io/github/igrek51/trimmer?branch=master)
 
 
 Are you tired of quiet songs on Youtube with long silence before or after song? 
