@@ -36,9 +36,9 @@ def download_from_youtube(url: str) -> str:
         return full_filename
 
 
-def fetch_youtube_title(url: str) -> str:
+def fetch_youtube_metadata(url: str) -> Tuple[str, str, str]:
     with wrap_context('fetching title from youtube', url=url):
-        info('fetching title from youtube...', url=url)
+        info('fetching metadata from youtube page...', url=url)
 
         ydl_opts = {
             'format': 'bestaudio/best',
@@ -51,14 +51,18 @@ def fetch_youtube_title(url: str) -> str:
         }
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             einfo = ydl.extract_info(url, download=False)
-            filename = ydl.prepare_filename(einfo)
-            title = filename[:-4]
-            info('youtube title fetched', yt_title=title)
-            return title
+
+            track = einfo.get('track')
+            artist = einfo.get('artist') or einfo.get('creator')
+            full_title = einfo.get('title') or einfo.get('alt_title')
+
+            info('youtube page metadata fetched', yt_title=full_title, artist=artist, track=track)
+            return artist, track, full_title
 
 
 def extract_youtube_artist_title(url: str) -> Tuple[str, str]:
-    yt_title = fetch_youtube_title(url)
-    artist, title = extract_artist_title(yt_title)
-    info('artist & title extracted from youtube page', artist=artist, title=title)
-    return artist, title
+    artist, track, full_title = fetch_youtube_metadata(url)
+    if artist and track:
+        return artist, track
+
+    return extract_artist_title(full_title)

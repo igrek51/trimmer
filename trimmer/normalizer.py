@@ -13,8 +13,10 @@ def normalize_song(mp3_file: str, no_trim: bool, no_fade: bool, no_normalize: bo
         song = AudioSegment.from_mp3(mp3_file)
 
         if not no_normalize:
-            info('normalizing volume level...')
-            gain = -song.max_dBFS
+            max_dbfs = song.max_dBFS
+            loudness = song.dBFS
+            info('normalizing volume level...', max_dBFS=f'{max_dbfs:.2f}dB', dBFS=f'{loudness:.2f}dB')
+            gain = -max_dbfs
             if user_gain is not None:
                 gain = user_gain
             song = song.apply_gain(gain)
