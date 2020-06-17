@@ -22,7 +22,7 @@ def tag_mp3(mp3_file: str, artist: str, title: str):
 
 def read_mp3_artist_title(mp3_file: str) -> Tuple[str, str]:
     with wrap_context('extracting mp3 metadata', mp3_file=mp3_file):
-        tag_artist, tag_title = read_mp3_artist_title(mp3_file)
+        tag_artist, tag_title = read_mp3_tags(mp3_file)
         file_artist, file_title = extract_filename_artist_title(mp3_file)
         artist = tag_artist or file_artist
         title = tag_title or file_title
