@@ -6,7 +6,7 @@ from trimmer.downloader import download_from_youtube, extract_youtube_artist_tit
 from trimmer.normalizer import normalize_song
 from trimmer.renamer import rename_song
 from trimmer.sublog.sublog import info, log_error, wrap_context
-from trimmer.tagger import read_mp3_tags
+from trimmer.tagger import read_mp3_artist_title
 from trimmer.tagger import tag_mp3
 
 
@@ -46,7 +46,7 @@ def trim_mp3(file: str, artist: Optional[str], title: Optional[str],
     with wrap_context('mp3 song'):
         assert os.path.isfile(file), 'input file should exist'
 
-        tag_artist, tag_title = read_mp3_tags(file)
+        tag_artist, tag_title = read_mp3_artist_title(file)
         artist = artist or tag_artist or input('Artist: ')
         title = title or tag_title or input('Title: ')
 
