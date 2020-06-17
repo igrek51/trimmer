@@ -10,7 +10,8 @@ def extract_artist_title(name: str) -> Tuple[str, str]:
     artist = name[:dash_index].strip()
 
     title = name[dash_index + 1:].strip()
-    title = re.sub(r"\(.+?\)", "", title)
-    title = re.sub(r"[. ]+$", "", title)
+    title = re.sub(r"\(.+?\)", "", title)  # parentheses
+    title = re.sub(r"\[.+?\]", "", title)  # square brackets
+    title = re.sub(r"[. ]+$", "", title.strip())
 
     return artist, title

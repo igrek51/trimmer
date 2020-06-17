@@ -11,8 +11,7 @@ install:
 before_script:
   - python3 setup.py develop
 script:
-  - ./pytest.sh
+  - ./pytest.sh | tee pytest.log
 after_success:
   - coveralls
   - CODECOV_TOKEN="739130b8-72eb-4a55-9ee7-12713c9df60d" bash <(curl -s https://codecov.io/bash)
-
