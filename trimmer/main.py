@@ -1,4 +1,5 @@
 from cliglue import CliBuilder, argument, parameter, flag
+from cliglue.completers import file_completer
 
 from .trim_source import trim_from_source
 from .version import __version__
@@ -7,7 +8,7 @@ from .version import __version__
 def main():
     CliBuilder('trimmer', version=__version__, help='MP3 song normalizer',
                run=trim_from_source, help_on_empty=True).has(
-        argument('source', help='song source (youtube URL or MP3 file)'),
+        argument('source', help='song source (youtube URL or MP3 file)', choices=file_completer),
         parameter('artist', help='song artist', type=str),
         parameter('title', help='song title', type=str),
         parameter('trim-start', help='trim given seconds at the beginning', type=float),
