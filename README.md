@@ -78,9 +78,9 @@ For Linux make sure that required libs are installed: `apt install ffmpeg libavc
 For Windows you might need to put [ffmpeg binaries](https://ffmpeg.zeranoe.com/builds/) to `PATH`.
 
 ## Upgrading
-For frequently changing dependencies API:
+Keep up-to-date frequently changing dependencies (due to Youtube API changes):
 ```
-pip3 install --upgrade trimmer
+pip3 install --upgrade --upgrade-strategy eager trimmer
 ```
 
 ## Install locally in develop mode
