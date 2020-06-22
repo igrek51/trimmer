@@ -1,17 +1,16 @@
 import os
-import re
 import uuid
 from typing import Tuple
 
 import youtube_dl
 
 from trimmer.metadata import extract_artist_title
-from trimmer.sublog.sublog import wrap_context, info
+from trimmer.sublog.sublog import wrap_context, log
 
 
 def download_from_youtube(url: str) -> str:
     with wrap_context('downloading from youtube', url=url):
-        info('downloading from youtube...', url=url)
+        log.info('downloading from youtube...', url=url)
 
         uid = str(uuid.uuid4())
         filename = f'trimmer_dl_{uid}'
@@ -31,14 +30,14 @@ def download_from_youtube(url: str) -> str:
 
         full_filename = f'{filename}.mp3'
         assert os.path.isfile(full_filename)
-        info('song downloaded', tmpfile=full_filename)
+        log.info('song downloaded', tmpfile=full_filename)
 
         return full_filename
 
 
 def fetch_youtube_metadata(url: str) -> Tuple[str, str, str]:
     with wrap_context('fetching title from youtube', url=url):
-        info('fetching metadata from youtube page...', url=url)
+        log.info('fetching metadata from youtube page...', url=url)
 
         ydl_opts = {
             'format': 'bestaudio/best',
@@ -56,7 +55,7 @@ def fetch_youtube_metadata(url: str) -> Tuple[str, str, str]:
             artist = einfo.get('artist') or einfo.get('creator')
             full_title = einfo.get('title') or einfo.get('alt_title')
 
-            info('youtube page metadata fetched', yt_title=full_title, artist=artist, track=track)
+            log.info('youtube page metadata fetched', yt_title=full_title, artist=artist, track=track)
             return artist, track, full_title
 
 

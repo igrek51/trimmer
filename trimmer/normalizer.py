@@ -2,46 +2,46 @@ from typing import Optional
 
 from pydub import AudioSegment
 
-from trimmer.sublog.sublog import wrap_context, info
+from trimmer.sublog.sublog import wrap_context, log
 
 
 def normalize_song(mp3_file: str, no_trim: bool, no_fade: bool, no_normalize: bool,
                    user_trim_start: Optional[float] = None, user_trim_end: Optional[float] = None,
                    user_gain: Optional[float] = None):
     with wrap_context('normalizing mp3', mp3_file=mp3_file):
-        info('loading song...', mp3_file=mp3_file)
+        log.info('loading song...', mp3_file=mp3_file)
         song = AudioSegment.from_mp3(mp3_file)
 
         if not no_normalize:
             max_dbfs = song.max_dBFS
             loudness = song.dBFS
-            info('normalizing volume level...', max_dBFS=f'{max_dbfs:.2f}dB', dBFS=f'{loudness:.2f}dB')
+            log.info('normalizing volume level...', max_dBFS=f'{max_dbfs:.2f}dB', dBFS=f'{loudness:.2f}dB')
             gain = -max_dbfs
             if user_gain is not None:
                 gain = user_gain
             song = song.apply_gain(gain)
-            info('volume normalized', gain=f'{gain:.2f}dB')
+            log.info('volume normalized', gain=f'{gain:.2f}dB')
 
         if not no_trim:
-            info('trimming silence...')
+            log.info('trimming silence...')
             start_trim = user_trim_start * 1000 if user_trim_start is not None else detect_leading_silence(song)
             end_trim = user_trim_end * 1000 if user_trim_end is not None else detect_leading_silence(song.reverse(),
                                                                                                      margin=0)
             pre_duration = len(song)
             song = song[start_trim:len(song) - end_trim]
             post_duration = len(song)
-            info('silence trimmed', trim_start=duration_to_human(start_trim), trim_end=duration_to_human(end_trim),
-                 duration_before=duration_to_human(pre_duration), duration_after=duration_to_human(post_duration))
+            log.info('silence trimmed', trim_start=duration_to_human(start_trim), trim_end=duration_to_human(end_trim),
+                     duration_before=duration_to_human(pre_duration), duration_after=duration_to_human(post_duration))
 
         if not no_fade:
             fade_in_duration = 100
             fade_out_duration = 1000
-            info('applying fade-in & fade-out...',
-                 fade_in=duration_to_human(fade_in_duration), fade_out=duration_to_human(fade_out_duration))
+            log.info('applying fade-in & fade-out...',
+                     fade_in=duration_to_human(fade_in_duration), fade_out=duration_to_human(fade_out_duration))
             song = song.fade_in(fade_in_duration).fade_out(fade_out_duration)
 
         duartion = len(song)
-        info('saving song...', mp3_file=mp3_file, duration=duration_to_human(duartion))
+        log.info('saving song...', mp3_file=mp3_file, duration=duration_to_human(duartion))
         song.export(mp3_file, format="mp3")
 
 

@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from trimmer.sublog.sublog import wrap_context, info
+from trimmer.sublog.sublog import wrap_context, log
 
 
 def rename_song(mp3_file: str, artist: str, title: str) -> str:
@@ -10,5 +10,5 @@ def rename_song(mp3_file: str, artist: str, title: str) -> str:
         new_filename = f'{artist.strip()} - {title.strip()}.mp3'
         new_path = Path(dirname) / new_filename
         os.rename(mp3_file, new_path)
-        info('song renamed', new_name=new_path)
+        log.info('song renamed', new_name=new_path)
         return new_path
