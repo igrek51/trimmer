@@ -1,3 +1,4 @@
+import os
 from typing import Optional
 
 from nuclear.sublog import wrap_context, log
@@ -12,12 +13,12 @@ def normalize_song(mp3_file: str, no_trim: bool, no_fade: bool, no_normalize: bo
         song = AudioSegment.from_mp3(mp3_file)
 
         if not no_normalize:
-            max_dbfs = song.max_dBFS
-            loudness = song.dBFS
-            log.info('normalizing volume level...', max_dBFS=f'{max_dbfs:.2f}dB', dBFS=f'{loudness:.2f}dB')
-            gain = -max_dbfs
             if user_gain is not None:
                 gain = user_gain
+            else:
+                volume = calculate_volume(song)
+                log.info('normalizing volume level...', volume=f'{volume:.2f}dB', dBFS=f'{song.dBFS:.2f}dB')
+                gain = -volume
             song = song.apply_gain(gain)
             log.info('volume normalized', gain=f'{gain:.2f}dB')
 
@@ -42,6 +43,21 @@ def normalize_song(mp3_file: str, no_trim: bool, no_fade: bool, no_normalize: bo
         duartion = len(song)
         log.info('saving song...', mp3_file=mp3_file, duration=duration_to_human(duartion))
         song.export(mp3_file, format="mp3")
+
+
+def calculate_volume(song: AudioSegment) -> float:
+    volume = song.max_dBFS
+    if volume < -0.1:
+        return volume
+
+    lower_vol = 10
+    tmp_clip = '.anti_clip.mp3'
+    log.debug('detecting clipping...')
+    lowered = song.apply_gain(-lower_vol)
+    lowered.export(tmp_clip, format="mp3")
+    lowered = AudioSegment.from_mp3(tmp_clip)
+    os.remove(tmp_clip)
+    return lowered.max_dBFS + lower_vol
 
 
 def detect_leading_silence(song: AudioSegment, margin: int = 100) -> int:

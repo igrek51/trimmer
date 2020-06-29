@@ -15,7 +15,7 @@ Trimmer does the following things:
 
 1. Downloads songs from given Youtube URL (thanks to [youtube-dl](https://github.com/ytdl-org/youtube-dl))
 2. Trims down silence at the beginning & at the end of song (thanks to [pydub](https://github.com/jiaaro/pydub))
-3. Normalizes volume level, applies fade-in & fade-out (thanks to [pydub](https://github.com/jiaaro/pydub))
+3. Normalizes volume level (detecting clipping), applies fade-in & fade-out (thanks to [pydub](https://github.com/jiaaro/pydub))
 4. Adds MP3 ID3 tags - both ID3v1 & ID3v2 (thanks to [eyed3](https://github.com/nicfit/eyeD3))
 5. Creates mp3 file named: `Artist - Title.mp3`
 

@@ -1,33 +1,35 @@
 import os
 import re
+import shutil
 from typing import Optional
 
 from nuclear.sublog import log, log_error, wrap_context
 
 from trimmer.downloader import download_from_youtube, extract_youtube_artist_title
 from trimmer.normalizer import normalize_song
-from trimmer.renamer import rename_song
+from trimmer.renamer import rename_song, rename_output_song
 from trimmer.tagger import read_mp3_artist_title
 from trimmer.tagger import tag_mp3
 
 
 def trim_from_source(source: str, artist: Optional[str], title: Optional[str],
                      no_trim: bool, no_fade: bool, no_normalize: bool,
-                     trim_start: Optional[float], trim_end: Optional[float], gain: Optional[float]):
+                     trim_start: Optional[float], trim_end: Optional[float], gain: Optional[float],
+                     output: Optional[str]):
     with log_error():
         if source_is_url(source):
             log.info('source recognized as url', source=source)
-            trim_url(source, artist, title, no_trim, no_fade, no_normalize, trim_start, trim_end, gain)
+            trim_url(source, artist, title, no_trim, no_fade, no_normalize, trim_start, trim_end, gain, output)
         elif source_is_mp3(source):
             log.info('source recognized as mp3 file', source=source)
-            trim_mp3(source, artist, title, no_trim, no_fade, no_normalize, trim_start, trim_end, gain)
+            trim_mp3(source, artist, title, no_trim, no_fade, no_normalize, trim_start, trim_end, gain, output)
         else:
             raise RuntimeError(f'unrecognized source: {source}')
 
 
 def trim_url(url: str, user_artist: Optional[str], user_title: Optional[str],
              no_trim: bool, no_fade: bool, no_normalize: bool,
-             trim_start: Optional[float] = None, trim_end: Optional[float] = None, gain: Optional[float] = None):
+             trim_start: Optional[float], trim_end: Optional[float], gain: Optional[float], output: Optional[str]):
     with wrap_context('url song'):
         yt_artist, yt_title = extract_youtube_artist_title(url)
         log.info('artist & title extracted from youtube page', artist=yt_artist, title=yt_title)
@@ -35,7 +37,10 @@ def trim_url(url: str, user_artist: Optional[str], user_title: Optional[str],
         title = user_title or enter_or_default('Title', default=yt_title)
 
         mp3_file = download_from_youtube(url)
-        mp3_file = rename_song(mp3_file, artist, title)
+        if output:
+            mp3_file = rename_output_song(mp3_file, output)
+        else:
+            mp3_file = rename_song(mp3_file, artist, title)
         normalize_song(mp3_file, no_trim, no_fade, no_normalize, trim_start, trim_end, gain)
         tag_mp3(mp3_file, artist, title)
 
@@ -44,9 +49,13 @@ def trim_url(url: str, user_artist: Optional[str], user_title: Optional[str],
 
 def trim_mp3(file: str, user_artist: Optional[str], user_title: Optional[str],
              no_trim: bool, no_fade: bool, no_normalize: bool,
-             trim_start: Optional[float] = None, trim_end: Optional[float] = None, gain: Optional[float] = None):
+             trim_start: Optional[float], trim_end: Optional[float], gain: Optional[float], output: Optional[str]):
     with wrap_context('mp3 song'):
         assert os.path.isfile(file), 'input file should exist'
+
+        if output:
+            shutil.copyfile(file, output)
+            file = output
 
         tag_artist, tag_title = read_mp3_artist_title(file)
         artist = user_artist or tag_artist or enter_or_default('Artist')
