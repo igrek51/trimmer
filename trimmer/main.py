@@ -1,5 +1,5 @@
-from cliglue import CliBuilder, argument, parameter, flag
-from cliglue.completers import file_completer
+from nuclear import CliBuilder, argument, parameter, flag
+from nuclear.completers import file_completer
 
 from .trim_source import trim_from_source
 from .version import __version__

@@ -3,9 +3,9 @@ from typing import Tuple
 
 import eyed3
 from eyed3.id3 import ID3_V2_4, ID3_V1_1
+from nuclear.sublog import wrap_context, log
 
 from trimmer.metadata import extract_artist_title
-from trimmer.sublog.sublog import wrap_context, log
 
 
 def tag_mp3(mp3_file: str, artist: str, title: str):

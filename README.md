@@ -35,7 +35,7 @@ trimmer "unknown001.mp3"
 From this:  
 **unknown001.mp3**  
 ![Usage example](https://github.com/igrek51/trimmer/blob/master/docs/img/song_amp_bad.png?raw=true)  
-trimmer does this:  
+trimmer does that:  
 **Mike Oldfield - Tubular Bells Part I.mp3**  
 ![Usage example](https://github.com/igrek51/trimmer/blob/master/docs/img/song_amp_good.png?raw=true)
 
@@ -44,7 +44,7 @@ You can also trim song manually using `--trim-start` and `--trim-end` (e.g. for 
 ## Help
 ```shell
 $ trimmer --help
-trimmer v0.1.5 (cliglue v1.0.10) - MP3 song normalizer
+trimmer v0.1.5 (nuclear v1.0.10) - MP3 song normalizer
 
 Usage:
 trimmer [OPTIONS] SOURCE

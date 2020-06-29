@@ -1,8 +1,7 @@
 from typing import Optional
 
+from nuclear.sublog import wrap_context, log
 from pydub import AudioSegment
-
-from trimmer.sublog.sublog import wrap_context, log
 
 
 def normalize_song(mp3_file: str, no_trim: bool, no_fade: bool, no_normalize: bool,

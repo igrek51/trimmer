@@ -1,5 +1,5 @@
 dataclasses
 pydub
 eyeD3
-cliglue
+nuclear
 youtube-dl

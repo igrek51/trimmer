@@ -2,10 +2,11 @@ import os
 import re
 from typing import Optional
 
+from nuclear.sublog import log, log_error, wrap_context
+
 from trimmer.downloader import download_from_youtube, extract_youtube_artist_title
 from trimmer.normalizer import normalize_song
 from trimmer.renamer import rename_song
-from trimmer.sublog.sublog import log, log_error, wrap_context
 from trimmer.tagger import read_mp3_artist_title
 from trimmer.tagger import tag_mp3
 

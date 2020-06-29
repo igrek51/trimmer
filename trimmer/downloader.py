@@ -3,9 +3,9 @@ import uuid
 from typing import Tuple
 
 import youtube_dl
+from nuclear.sublog import wrap_context, log
 
 from trimmer.metadata import extract_artist_title
-from trimmer.sublog.sublog import wrap_context, log
 
 
 def download_from_youtube(url: str) -> str:

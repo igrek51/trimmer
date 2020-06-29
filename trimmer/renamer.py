@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from trimmer.sublog.sublog import wrap_context, log
+from nuclear.sublog import wrap_context, log
 
 
 def rename_song(mp3_file: str, artist: str, title: str) -> str:
