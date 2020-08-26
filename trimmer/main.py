@@ -14,8 +14,9 @@ def main():
         parameter('trim-start', help='trim given seconds at the beginning', type=float),
         parameter('trim-end', help='trim given seconds at the end', type=float),
         parameter('gain', help='increase volume by given dB', type=float),
-        parameter('output', help='output MP3 file (Artist - Title by default)'),
+        parameter('output', help='output MP3 file (Artist - Title.mp3 by default)'),
         flag('no-normalize', help='skip normalizing volume level'),
         flag('no-trim', help='skip trimming silence at the edges of song'),
         flag('no-fade', help='skip applying fade-in & fade-out'),
+        flag('no-rename', help='skip renaming song to normalized filename (Artist - Title.mp3)'),
     ).run()

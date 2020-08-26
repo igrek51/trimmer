@@ -1,5 +1,5 @@
 import os
-from typing import Tuple
+from typing import Tuple, Optional
 
 import eyed3
 from eyed3.id3 import ID3_V2_4, ID3_V1_1
@@ -32,14 +32,13 @@ def read_mp3_artist_title(mp3_file: str) -> Tuple[str, str]:
 
 def read_mp3_tags(mp3_file: str) -> Tuple[str, str]:
     with wrap_context('reading mp3 tags'):
-
         audiofile = eyed3.load(mp3_file)
         if audiofile is None or audiofile.tag is None:
             log.warn('no IDv3 tags read', mp3_file=mp3_file)
             return '', ''
 
-        artist = audiofile.tag.artist.strip()
-        title = audiofile.tag.title.strip()
+        artist = _oremptystr(audiofile.tag.artist).strip()
+        title = _oremptystr(audiofile.tag.title).strip()
         log.info('IDv3 tags read', mp3_file=mp3_file, artist=artist, title=title)
         return artist, title
 
@@ -50,3 +49,7 @@ def extract_filename_artist_title(mp3_file: str) -> Tuple[str, str]:
         if filename.lower().endswith('.mp3'):
             filename = mp3_file[:-4]
         return extract_artist_title(filename)
+
+
+def _oremptystr(instr: Optional[str]) -> str:
+    return '' if instr is None else instr

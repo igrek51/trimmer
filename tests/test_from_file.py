@@ -13,7 +13,7 @@ def test_trim_from_file():
     assert os.path.isfile(source), 'source file should exist'
 
     trim_from_source(source, artist='result_Mike', title=None,
-                     no_trim=False, no_fade=False, no_normalize=False,
+                     no_trim=False, no_fade=False, no_normalize=False, no_rename=False,
                      trim_start=None, trim_end=None, gain=None, output=None)
 
     assert not os.path.isfile(source), 'source file should not exist any longer'
