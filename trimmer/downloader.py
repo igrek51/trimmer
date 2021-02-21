@@ -5,7 +5,7 @@ from typing import Tuple
 import youtube_dl
 from nuclear.sublog import wrap_context, log
 
-from trimmer.metadata import extract_artist_title
+from trimmer.metadata import extract_artist_title, trim_parentheses
 
 
 def download_from_youtube(url: str) -> str:
@@ -62,6 +62,6 @@ def fetch_youtube_metadata(url: str) -> Tuple[str, str, str]:
 def extract_youtube_artist_title(url: str) -> Tuple[str, str]:
     artist, track, full_title = fetch_youtube_metadata(url)
     if artist and track:
-        return artist, track
+        return artist, trim_parentheses(track)
 
     return extract_artist_title(full_title)

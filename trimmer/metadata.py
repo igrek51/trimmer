@@ -15,3 +15,8 @@ def extract_artist_title(name: str) -> Tuple[str, str]:
     title = re.sub(r"[. ]+$", "", title.strip())
 
     return artist, title
+
+
+def trim_parentheses(name: str) -> str:
+    name = re.sub(r"\(.+?\)", "", name)
+    return name.strip()

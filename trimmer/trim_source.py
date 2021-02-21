@@ -37,6 +37,7 @@ def trim_url(url: str, user_artist: Optional[str], user_title: Optional[str],
         log.info('artist & title extracted from youtube page', artist=yt_artist, title=yt_title)
         artist = user_artist or enter_or_default('Artist', default=yt_artist)
         title = user_title or enter_or_default('Title', default=yt_title)
+        log.info('song name set', name=f'{artist} - {title}')
 
         mp3_file = download_from_youtube(url)
         if output:
