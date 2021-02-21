@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 #clean
 rm -rf build/
