@@ -1,5 +1,5 @@
-dataclasses
-pydub
-eyeD3
-nuclear
-youtube-dl
+pydub>=0.25.1
+eyeD3>=0.9.7
+nuclear>=1.2.3
+yt-dlp>=2023.3.4
+youtube-dl>=2021.12.17

@@ -11,4 +11,4 @@ dist/
 .idea
 *.iml
 venv/
-
+.vscode

@@ -1,7 +1,7 @@
 import os
-import sys
+from pathlib import Path
 
-import youtube_dl
+import yt_dlp
 
 
 def test_youtube_dl_download():
@@ -18,7 +18,7 @@ def test_youtube_dl_download():
         }],
         'outtmpl': '/tmp/trimmer_dl_1234.%(ext)s',
     }
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         result = ydl.download([url])
         print(result)
 
@@ -40,10 +40,7 @@ def test_youtube_dl_title():
         }],
         'outtmpl': '%(title)s.%(ext)s',
     }
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        print('ydl._screen_file', ydl._screen_file)
-        print('ydl._screen_file.mode', ydl._screen_file.mode)
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(url, download=False)
         filename = ydl.prepare_filename(info)
-        title = filename[:-4]
-        assert title == 'O KURWA'
+        assert Path(filename).stem == 'O KURWA'

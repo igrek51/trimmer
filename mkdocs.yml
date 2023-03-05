@@ -1,8 +1,54 @@
 site_name: trimmer
-theme: readthedocs
+repo_name: igrek51/trimmer
 repo_url: https://github.com/igrek51/trimmer
 site_author: igrek51
-docs_dir: docs
+docs_dir: .
+edit_uri: ''
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+    logo: fontawesome/solid/scissors
+  palette:
+    - scheme: default
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      primary: black
+      accent: light blue
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.expand
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.superfences
+plugins:
+  - search
+  - same-dir
+  - exclude:
+      glob:
+        - venv/*
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/igrek51/trimmer
+      name: trimmer on GitHub
+extra_css:
+  - docs/css/termynal.css
+  - docs/css/custom.css
+extra_javascript:
+  - docs/js/termynal.js
+  - docs/js/custom.js
 
 nav:
-    - Single page documentation: README.md
+  - Home: index.md

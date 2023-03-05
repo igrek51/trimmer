@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+---
+
 # Trimmer
 MP3 song normalizer
 
@@ -12,7 +17,7 @@ Are you tired of quiet songs on Youtube with long silence before or after song?
 
 Trimmer does the following things:
 
-1. Downloads songs from given Youtube URL (thanks to [youtube-dl](https://github.com/ytdl-org/youtube-dl) and [yt-dlp](https://github.com/yt-dlp/yt-dlp))
+1. Downloads songs from given Youtube URL (thanks to [youtube-dl](https://github.com/ytdl-org/youtube-dl))
 2. Trims down silence at the beginning & at the end of song (thanks to [pydub](https://github.com/jiaaro/pydub))
 3. Normalizes volume level (detecting clipping), applies fade-in & fade-out (thanks to [pydub](https://github.com/jiaaro/pydub))
 4. Adds MP3 ID3 tags - both ID3v1 & ID3v2 (thanks to [eyed3](https://github.com/nicfit/eyeD3))
@@ -20,10 +25,19 @@ Trimmer does the following things:
 
 ## Downloading MP3
 Create trimmed, normalized & tagged mp3 from Youtube URL:
-```shell
-trimmer https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+<div class="termy">
+```console
+$ trimmer https://www.youtube.com/watch?v=dQw4w9WgXcQ
+<span class="code-gray">[2022-04-01 09:19:15]</span> <span class="code-green">DEBUG</span> matching regex pattern <span class="code-green">pattern=</span><span class="code-bold-green">(\d+).mp3</span> <span class="code-green">testing_mode=</span><span class="code-bold-green">True</span>
+<span class="code-gray">[2022-04-01 09:19:15]</span> <span class="code-blue">INFO</span>  matched file <span class="code-green">file="<span class="code-bold-green">Stanisław_Lem_Invincible (3)  .mp3</span>"</span> <span class="code-green">group_1=</span><span class="code-bold-green">3</span>
+<span class="code-gray">[2022-04-01 09:19:15]</span> <span class="code-blue">INFO</span>  matched file <span class="code-green">file="<span class="code-bold-green">Stanis▯aw+Lem+Invincible+(1).mp3</span>"</span> <span class="code-green">group_1=</span><span class="code-bold-green">1</span>
+<span class="code-gray">[2022-04-01 09:19:15]</span> <span class="code-blue">INFO</span>  matched file <span class="code-green">file="<span class="code-bold-green">Stanis▯aw+Lem+Invincible+(2 ).mp3</span>"</span> <span class="code-green">group_1=</span><span class="code-bold-green">2</span>
+<span class="code-gray">[2022-04-01 09:19:15]</span> <span class="code-blue">INFO</span>  matched file <span class="code-green">file="<span class="code-bold-green">Stanis▯aw+Lem+Invincible+(51).mp3</span>"</span> <span class="code-green">group_1=</span><span class="code-bold-green">51</span>
+<span class="code-gray">[2022-04-01 09:19:15]</span> <span class="code-blue">INFO</span>  files matched <span class="code-green">count=</span><span class="code-bold-green">4</span>
 ```
-![Usage example](https://github.com/igrek51/trimmer/blob/master/docs/img/screenshot-1.png?raw=true)
+
+</div>
 
 ## Editing MP3
 ```shell
