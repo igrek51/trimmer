@@ -9,7 +9,7 @@ def normalize_song(mp3_file: str, no_trim: bool, no_fade: bool, no_normalize: bo
                    user_trim_start: Optional[float] = None, user_trim_end: Optional[float] = None,
                    user_gain: Optional[float] = None):
     with wrap_context('normalizing mp3', mp3_file=mp3_file):
-        log.info('loading song...', mp3_file=mp3_file)
+        log.info('loading song...')
         song = AudioSegment.from_mp3(mp3_file)
 
         if not no_normalize:

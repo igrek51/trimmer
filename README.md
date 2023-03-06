@@ -59,7 +59,7 @@ pip3 install --upgrade --upgrade-strategy eager trimmer
 ## Help
 ```shell
 $ trimmer --help
-trimmer v0.1.5 (nuclear v1.0.10) - MP3 song normalizer
+trimmer v1.0.0 (nuclear v1.3.4) - MP3 song normalizer
 
 Usage:
 trimmer [OPTIONS] SOURCE
@@ -74,9 +74,12 @@ Options:
   --title TITLE               - song title
   --trim-start TRIM_START     - trim given seconds at the beginning
   --trim-end TRIM_END         - trim given seconds at the end
+  --gain GAIN                 - increase volume by given dB
+  --output OUTPUT             - output MP3 file (Artist - Title.mp3 by default)
   --no-normalize              - skip normalizing volume level
   --no-trim                   - skip trimming silence at the edges of song
   --no-fade                   - skip applying fade-in & fade-out
+  --no-rename                 - skip renaming song to normalized filename (Artist - Title.mp3)
 ```
 
 ## Install locally in develop mode

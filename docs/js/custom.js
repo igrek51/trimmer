@@ -9,6 +9,7 @@ function setupTermynal() {
     const promptLiteralStart = "$ ";
     const customPromptLiteralStart = "# ";
     const termynalActivateClass = "termy";
+    const delayLiteralStart = "DELAY! ";
     let termynals = [];
 
     function createTermynals() {
@@ -54,6 +55,14 @@ function setupTermynal() {
                         useLines.push({
                             type: "input",
                             value: value
+                        });
+                    } else if (line.startsWith(delayLiteralStart)) {
+                        saveBuffer();
+                        const value = line.replace(delayLiteralStart, "");
+                        useLines.push({
+                            value: value,
+                            delay: 500,
+                            "data-ty-delay": 500,
                         });
                     } else if (line.startsWith("// ")) {
                         saveBuffer();

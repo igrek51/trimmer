@@ -29,12 +29,25 @@ Create trimmed, normalized & tagged mp3 from Youtube URL:
 <div class="termy">
 ```console
 $ trimmer https://www.youtube.com/watch?v=dQw4w9WgXcQ
-<span class="code-gray">[2022-04-01 09:19:15]</span> <span class="code-green">DEBUG</span> matching regex pattern <span class="code-green">pattern=</span><span class="code-bold-green">(\d+).mp3</span> <span class="code-green">testing_mode=</span><span class="code-bold-green">True</span>
-<span class="code-gray">[2022-04-01 09:19:15]</span> <span class="code-blue">INFO</span>  matched file <span class="code-green">file="<span class="code-bold-green">Stanisław_Lem_Invincible (3)  .mp3</span>"</span> <span class="code-green">group_1=</span><span class="code-bold-green">3</span>
-<span class="code-gray">[2022-04-01 09:19:15]</span> <span class="code-blue">INFO</span>  matched file <span class="code-green">file="<span class="code-bold-green">Stanis▯aw+Lem+Invincible+(1).mp3</span>"</span> <span class="code-green">group_1=</span><span class="code-bold-green">1</span>
-<span class="code-gray">[2022-04-01 09:19:15]</span> <span class="code-blue">INFO</span>  matched file <span class="code-green">file="<span class="code-bold-green">Stanis▯aw+Lem+Invincible+(2 ).mp3</span>"</span> <span class="code-green">group_1=</span><span class="code-bold-green">2</span>
-<span class="code-gray">[2022-04-01 09:19:15]</span> <span class="code-blue">INFO</span>  matched file <span class="code-green">file="<span class="code-bold-green">Stanis▯aw+Lem+Invincible+(51).mp3</span>"</span> <span class="code-green">group_1=</span><span class="code-bold-green">51</span>
-<span class="code-gray">[2022-04-01 09:19:15]</span> <span class="code-blue">INFO</span>  files matched <span class="code-green">count=</span><span class="code-bold-green">4</span>
+<span class="code-gray">[2023-03-06 23:08:27]</span> <span class="code-blue">INFO</span>  source recognized as url <span class="code-green">source=</span><span class="code-bold-green">https://www.youtube.com/watch?v=dQw4w9WgXcQ</span>
+<span class="code-gray">[2023-03-06 23:08:27]</span> <span class="code-blue">INFO</span>  fetching metadata from youtube page... <span class="code-green">url=</span><span class="code-bold-green">https://www.youtube.com/watch?v=dQw4w9WgXcQ</span>
+<span class="code-gray">[2023-03-06 23:08:31]</span> <span class="code-blue">INFO</span>  youtube page metadata fetched <span class="code-green">yt_title="</span><span class="code-bold-green">Rick Astley - Never Gonna Give You Up (Official Music Video)</span><span class="code-green">" artist=</span><span class="code-bold-green">None</span>
+<span class="code-gray">[2023-03-06 23:08:31]</span> <span class="code-blue">INFO</span>  artist & title extracted from youtube page <span class="code-green">artist="</span><span class="code-bold-green">Rick Astley</span><span class="code-green">" title="</span><span class="code-bold-green">Never Gonna Give You Up</span><span class="code-green">"</span>
+Enter Artist ("Rick Astley" by default): <span>Rick Astley</span>
+Enter Title ("Never Gonna Give You Up" by default): <span>Never Gonna Give You Up</span>
+<span class="code-gray">[2023-03-06 23:08:36]</span> <span class="code-blue">INFO</span>  song name set <span class="code-green">name="</span><span class="code-bold-green">Rick Astley - Never Gonna Give You Up</span><span class="code-green">"</span>
+<span class="code-gray">[2023-03-06 23:08:36]</span> <span class="code-blue">INFO</span>  downloading from youtube... <span class="code-green">url=</span><span class="code-bold-green">https://www.youtube.com/watch?v=dQw4w9WgXcQ</span>
+<span class="code-gray">[2023-03-06 23:08:42]</span> <span class="code-blue">INFO</span>  song downloaded <span class="code-green">tmpfile=</span><span class="code-bold-green">trimmer_dl_b737b09b-beb7-412e-901a-425e14418b5c.mp3</span>
+<span class="code-gray">[2023-03-06 23:08:42]</span> <span class="code-blue">INFO</span>  song renamed <span class="code-green">new_name="</span><span class="code-bold-green">Rick Astley - Never Gonna Give You Up.mp3</span><span class="code-green">"</span>
+<span class="code-gray">[2023-03-06 23:08:42]</span> <span class="code-blue">INFO</span>  loading song...
+<span class="code-gray">[2023-03-06 23:08:42]</span> <span class="code-blue">INFO</span>  normalizing volume level... <span class="code-green">volume=</span><span class="code-bold-green">-0.98dB</span> <span class="code-green">dBFS=</span><span class="code-bold-green">-16.97dB</span>
+<span class="code-gray">[2023-03-06 23:08:42]</span> <span class="code-blue">INFO</span>  volume normalized <span class="code-green">gain=</span><span class="code-bold-green">0.98dB</span>
+<span class="code-gray">[2023-03-06 23:08:42]</span> <span class="code-blue">INFO</span>  trimming silence...
+<span class="code-gray">[2023-03-06 23:08:43]</span> <span class="code-blue">INFO</span>  silence trimmed <span class="code-green">trim_start=</span><span class="code-bold-green">0.000s</span> <span class="code-green">trim_end=</span><span class="code-bold-green">2.000s</span> <span class="code-green">duration_before=</span><span class="code-bold-green">3:32.045</span> <span class="code-green">duration_after=</span><span class="code-bold-green">3:30.045</span>
+<span class="code-gray">[2023-03-06 23:08:43]</span> <span class="code-blue">INFO</span>  applying fade-in & fade-out... <span class="code-green">fade_in=</span><span class="code-bold-green">0.100s</span> <span class="code-green">fade_out=</span><span class="code-bold-green">1.000s</span>
+<span class="code-gray">[2023-03-06 23:08:43]</span> <span class="code-blue">INFO</span>  saving song... <span class="code-green">mp3_file="</span><span class="code-bold-green">Rick Astley - Never Gonna Give You Up.mp3</span><span class="code-green">" duration=</span><span class="code-bold-green">3:30.045</span>
+<span class="code-gray">[2023-03-06 23:08:46]</span> <span class="code-blue">INFO</span>  tagging mp3... <span class="code-green">artist="</span><span class="code-bold-green">Rick Astley</span><span class="code-green">" title="</span><span class="code-bold-green">Never Gonna Give You Up</span><span class="code-green">"</span>
+<span class="code-gray">[2023-03-06 23:08:46]</span> <span class="code-blue">INFO</span>  song saved <span class="code-green">mp3_file="</span><span class="code-bold-green">Rick Astley - Never Gonna Give You Up.mp3</span><span class="code-green">"</span>
 ```
 
 </div>
@@ -73,7 +86,7 @@ pip3 install --upgrade --upgrade-strategy eager trimmer
 ## Help
 ```shell
 $ trimmer --help
-trimmer v0.1.5 (nuclear v1.0.10) - MP3 song normalizer
+trimmer v1.0.0 (nuclear v1.3.4) - MP3 song normalizer
 
 Usage:
 trimmer [OPTIONS] SOURCE
@@ -88,9 +101,12 @@ Options:
   --title TITLE               - song title
   --trim-start TRIM_START     - trim given seconds at the beginning
   --trim-end TRIM_END         - trim given seconds at the end
+  --gain GAIN                 - increase volume by given dB
+  --output OUTPUT             - output MP3 file (Artist - Title.mp3 by default)
   --no-normalize              - skip normalizing volume level
   --no-trim                   - skip trimming silence at the edges of song
   --no-fade                   - skip applying fade-in & fade-out
+  --no-rename                 - skip renaming song to normalized filename (Artist - Title.mp3)
 ```
 
 ## Install locally in develop mode
