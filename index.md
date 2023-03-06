@@ -81,6 +81,10 @@ Keep up-to-date frequently changing dependencies (due to Youtube API changes):
 ```shell
 pip3 install --upgrade --upgrade-strategy eager trimmer
 ```
+or do the same with:
+```shell
+trimmer --upgrade
+```
 
 ## Help
 ```shell

@@ -1,13 +1,14 @@
-from nuclear import CliBuilder, argument, parameter, flag
+from nuclear import CliBuilder, argument, parameter, flag, primary_option
 from nuclear.completers import file_completer
 
-from .trim_source import trim_from_source
-from .version import __version__
+from trimmer.upgrade import upgrade_trimmer_dependencies
+from trimmer.trim_source import trim_from_source
+from trimmer.version import __version__
 
 
 def main():
     CliBuilder('trimmer', version=__version__, help='MP3 song normalizer',
-               run=trim_from_source, help_on_empty=True).has(
+               run=trim_from_source, help_on_empty=True, log_error=True).has(
         argument('source', help='song source (youtube URL or MP3 file)', choices=file_completer),
         parameter('artist', help='song artist', type=str),
         parameter('title', help='song title', type=str),
@@ -19,4 +20,6 @@ def main():
         flag('no-trim', help='skip trimming silence at the edges of song'),
         flag('no-fade', help='skip applying fade-in & fade-out'),
         flag('no-rename', help='skip renaming song to normalized filename (Artist - Title.mp3)'),
+        primary_option('--upgrade', help='upgrade trimmer itself and its dependencies',
+                       run=upgrade_trimmer_dependencies),
     ).run()
