@@ -1,25 +1,25 @@
 # Trimmer
 MP3 song normalizer
 
-[![GitHub version](https://badge.fury.io/gh/igrek51%2Ftrimmer.svg)](https://github.com/igrek51/trimmer)
-[![PyPI version](https://badge.fury.io/py/trimmer.svg)](https://pypi.org/project/trimmer)
+[![GitHub version (latest SemVer)](https://img.shields.io/github/v/tag/igrek51/trimmer?label=github&sort=semver)](https://github.com/igrek51/trimmer)
 [![Github Pages](https://img.shields.io/badge/docs-github.io-blue)](https://igrek51.github.io/trimmer)
-[![Build Status](https://travis-ci.org/igrek51/trimmer.svg?branch=master)](https://travis-ci.org/igrek51/trimmer)
+[![PyPI](https://img.shields.io/pypi/v/trimmer)](https://pypi.org/project/trimmer)
 [![codecov](https://codecov.io/gh/igrek51/trimmer/branch/master/graph/badge.svg)](https://codecov.io/gh/igrek51/trimmer)
 
 
-Are you tired of quiet songs on Youtube with long silence before or after song? 
+Do you find it annoying when songs on YouTube are recorded quietly and there is a long silence before and after the song?
 
-Trimmer does the following things:
+*Trimmer* corrects this by generating the normalized MP3 for you:
 
-1. Downloads songs from given Youtube URL (thanks to [youtube-dl](https://github.com/ytdl-org/youtube-dl) and [yt-dlp](https://github.com/yt-dlp/yt-dlp))
-2. Trims down silence at the beginning & at the end of song (thanks to [pydub](https://github.com/jiaaro/pydub))
-3. Normalizes volume level (detecting clipping), applies fade-in & fade-out (thanks to [pydub](https://github.com/jiaaro/pydub))
+1. Downloads a song from a URL on Youtube (thanks to [youtube-dl](https://github.com/ytdl-org/youtube-dl) and [yt-dlp](https://github.com/yt-dlp/yt-dlp))
+2. Trims down the silence at the beginning and at the end of a song (thanks to [pydub](https://github.com/jiaaro/pydub))
+3. Normalizes volume (detects clipping), and applies fade-in and fade-out (thanks to [pydub](https://github.com/jiaaro/pydub))
 4. Adds MP3 ID3 tags - both ID3v1 & ID3v2 (thanks to [eyed3](https://github.com/nicfit/eyeD3))
-5. Creates mp3 file named: `Artist - Title.mp3`
+5. Creates an mp3 file with a unified name `Artist - Title.mp3`
 
 ## Downloading MP3
-Create trimmed, normalized & tagged mp3 from Youtube URL:
+Create trimmed, normalized and tagged mp3 from Youtube URL:
+
 ```shell
 trimmer https://www.youtube.com/watch?v=dQw4w9WgXcQ
 ```

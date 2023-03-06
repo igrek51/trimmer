@@ -43,10 +43,10 @@ def _fetch_youtube_metadata(url: str) -> Tuple[str, str, str]:
 
 def _download_url(url: str, out_filename: str):
     try:
-        _download_url_youtube_dl(url, out_filename)
-    except Exception as e:
-        log.warn('youtube_dl failed, trying yt_dlp', error=str(e))
         _download_url_yt_dlp(url, out_filename)
+    except Exception as e:
+        log.warn('yt_dlp lib failed, trying again with youtube_dl', error=str(e))
+        _download_url_youtube_dl(url, out_filename)
 
 
 def _download_url_youtube_dl(url: str, out_filename: str):
@@ -81,10 +81,10 @@ def _download_url_yt_dlp(url: str, out_filename: str):
 
 def _extract_url_info(url: str) -> Tuple[str, str, str]:
     try:
-        return _extract_url_info_youtube_dl(url)
-    except Exception as e:
-        log.warn('youtube_dl failed, trying yt_dlp', error=str(e))
         return _extract_url_info_yt_dlp(url)
+    except Exception as e:
+        log.warn('yt_dlp lib failed, trying again with youtube_dl', error=str(e))
+        return _extract_url_info_youtube_dl(url)
 
 
 def _extract_url_info_youtube_dl(url: str) -> Tuple[str, str, str]:
