@@ -1,8 +1,8 @@
 from nuclear import shell
-from nuclear.sublog import log
+from nuclear.sublog import logger
 
 
 def upgrade_trimmer_dependencies():
-    log.info('Upgrading dependencies...')
+    logger.info('Upgrading dependencies...')
     shell('pip3 install --upgrade --upgrade-strategy eager trimmer')
-    log.info('Trimmer is up-to-date')
+    logger.info('Trimmer is up-to-date')

@@ -5,7 +5,7 @@ setup:
 	. venv/bin/activate &&\
 	pip install --upgrade pip setuptools &&\
 	pip install -r requirements.txt -r requirements-dev.txt -r requirements-docs.txt &&\
-	python setup.py develop
+	python -m pip install -e .
 
 test:
 	python3 -m coverage run --source trimmer -m pytest -vv --tb=short -ra --color=yes $(test)

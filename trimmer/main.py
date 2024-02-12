@@ -1,5 +1,5 @@
 from nuclear import CliBuilder, argument, parameter, flag, primary_option
-from nuclear.completers import file_completer
+from nuclear.cli.completers.file import file_completer
 
 from trimmer.upgrade import upgrade_trimmer_dependencies
 from trimmer.trim_source import trim_from_source

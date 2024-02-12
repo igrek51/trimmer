@@ -3,7 +3,7 @@ import re
 import shutil
 from typing import Optional
 
-from nuclear.sublog import log, log_error, wrap_context
+from nuclear.sublog import log, error_handler, add_context
 
 from trimmer.downloader import download_from_youtube, extract_youtube_artist_title
 from trimmer.normalizer import normalize_song
@@ -16,7 +16,7 @@ def trim_from_source(source: str, artist: Optional[str], title: Optional[str],
                      no_trim: bool, no_fade: bool, no_normalize: bool, no_rename: bool,
                      trim_start: Optional[float], trim_end: Optional[float], gain: Optional[float],
                      output: Optional[str]):
-    with log_error():
+    with error_handler():
         if source_is_url(source):
             log.info('source recognized as url', source=source)
             trim_url(source, artist, title, no_trim, no_fade, no_normalize,
@@ -32,7 +32,7 @@ def trim_from_source(source: str, artist: Optional[str], title: Optional[str],
 def trim_url(url: str, user_artist: Optional[str], user_title: Optional[str],
              no_trim: bool, no_fade: bool, no_normalize: bool,
              trim_start: Optional[float], trim_end: Optional[float], gain: Optional[float], output: Optional[str]):
-    with wrap_context('url song'):
+    with add_context('url song'):
         yt_artist, yt_title = extract_youtube_artist_title(url)
         log.info('artist & title extracted from youtube page', artist=yt_artist, title=yt_title)
         artist = user_artist or enter_or_default('Artist', default=yt_artist)
@@ -53,7 +53,7 @@ def trim_url(url: str, user_artist: Optional[str], user_title: Optional[str],
 def trim_mp3(mp3_file: str, user_artist: Optional[str], user_title: Optional[str],
              no_trim: bool, no_fade: bool, no_normalize: bool, no_rename: bool,
              trim_start: Optional[float], trim_end: Optional[float], gain: Optional[float], output: Optional[str]):
-    with wrap_context('mp3 song'):
+    with add_context('mp3 song'):
         assert os.path.isfile(mp3_file), 'input file should exist'
 
         if output:

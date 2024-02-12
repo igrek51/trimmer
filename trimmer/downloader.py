@@ -4,14 +4,14 @@ from typing import Tuple
 
 import youtube_dl
 import yt_dlp
-from nuclear.sublog import wrap_context, log
+from nuclear.sublog import add_context, logger
 
 from trimmer.metadata import extract_artist_title, trim_parentheses
 
 
 def download_from_youtube(url: str) -> str:
-    with wrap_context('downloading from youtube', url=url):
-        log.info('downloading from youtube...', url=url)
+    with add_context('downloading from youtube', url=url):
+        logger.info('downloading from youtube...', url=url)
 
         uid = str(uuid.uuid4())
         filename = f'trimmer_dl_{uid}'
@@ -20,7 +20,7 @@ def download_from_youtube(url: str) -> str:
 
         full_filename = f'{filename}.mp3'
         assert os.path.isfile(full_filename), "target file doesn't exist"
-        log.info('song downloaded', tmpfile=full_filename)
+        logger.info('song downloaded', tmpfile=full_filename)
 
         return full_filename
 
@@ -34,10 +34,10 @@ def extract_youtube_artist_title(url: str) -> Tuple[str, str]:
 
 
 def _fetch_youtube_metadata(url: str) -> Tuple[str, str, str]:
-    with wrap_context('fetching metadata from youtube', url=url):
-        log.info('fetching metadata from youtube page...', url=url)
+    with add_context('fetching metadata from youtube', url=url):
+        logger.info('fetching metadata from youtube page...', url=url)
         artist, track, full_title = _extract_url_info(url)
-        log.info('youtube page metadata fetched', yt_title=full_title, artist=artist, track=track)
+        logger.info('youtube page metadata fetched', yt_title=full_title, artist=artist, track=track)
         return artist, track, full_title
 
 
@@ -45,7 +45,7 @@ def _download_url(url: str, out_filename: str):
     try:
         _download_url_yt_dlp(url, out_filename)
     except Exception as e:
-        log.warn('yt_dlp lib failed, trying again with youtube_dl', error=str(e))
+        logger.warn('yt_dlp lib failed, trying again with youtube_dl', error=str(e))
         _download_url_youtube_dl(url, out_filename)
 
 
@@ -83,7 +83,7 @@ def _extract_url_info(url: str) -> Tuple[str, str, str]:
     try:
         return _extract_url_info_yt_dlp(url)
     except Exception as e:
-        log.warn('yt_dlp lib failed, trying again with youtube_dl', error=str(e))
+        logger.warn('yt_dlp lib failed, trying again with youtube_dl', error=str(e))
         return _extract_url_info_youtube_dl(url)
 
 
